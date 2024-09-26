@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import geminiRouter from "./routes/geminiRoute";
 import cors from "cors";
+// import serverlessExpress from "@codegenie/serverless-express";
 
 const app = express();
 dotenv.config({ path: "../.env" });
@@ -22,3 +23,5 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
 });
+
+// export const handler = serverlessExpress({ app });

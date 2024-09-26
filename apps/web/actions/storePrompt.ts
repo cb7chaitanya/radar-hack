@@ -2,7 +2,13 @@
 
 import prisma from "@repo/db/client";
 
-export async function geminiStorePrompt(prompt: string, userId: number) {
+export async function geminiStore(
+    prompt: string,
+    response: string,
+    inputToken: number,
+    outputToken: number,
+    userId: number
+) {
     await prisma.user.update({
         where: {
             id: userId,
@@ -15,16 +21,6 @@ export async function geminiStorePrompt(prompt: string, userId: number) {
                     },
                 ],
             },
-        },
-    });
-}
-
-export async function geminiStoreResponse(response: string, userId: number) {
-    await prisma.user.update({
-        where: {
-            id: userId,
-        },
-        data: {
             responseHistory: {
                 create: [
                     {
@@ -32,20 +28,6 @@ export async function geminiStoreResponse(response: string, userId: number) {
                     },
                 ],
             },
-        },
-    });
-}
-
-export async function geminiStoreTokenCount(
-    inputToken: number,
-    outputToken: number,
-    userId: number
-) {
-    await prisma.user.update({
-        where: {
-            id: userId,
-        },
-        data: {
             tokenCount: {
                 create: [
                     {
