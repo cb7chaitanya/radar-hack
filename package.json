@@ -19,5 +19,11 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.7.0",
+    "simplex-noise": "^4.0.3",
+    "tailwind-merge": "^2.5.2"
+  }
 }
