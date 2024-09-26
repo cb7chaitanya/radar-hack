@@ -60,8 +60,6 @@ export default function Chat() {
                 {responseArr}
                 <br />
                 {promptArr}
-                <br />
-                {input}
                 <div className="bg-gray-800 rounded-lg w-full p-4 flex items-center space-x-3">
                     <input
                         value={input}
