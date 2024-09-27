@@ -8,8 +8,8 @@ datasource db {
 }
 
 model User {
-  id                Int       @id @default(autoincrement())
-  email             String    @unique
+  id                Int            @id @default(autoincrement())
+  email             String         @unique
   name              String?
   promptHistory     Prompt[]  
   responseHistory   Response[]
@@ -17,24 +17,26 @@ model User {
 }
 
 model Prompt {
-  id                Int     @id @default(autoincrement())
-  user              User    @relation(references: [id], fields: [userId])
-  userId            Int     @unique
+  id                Int            @id @default(autoincrement())
+  user              User           @relation(references: [id], fields: [userId])
+  userId            Int     
   textContent       String
+  timestamp         DateTime       @default(now())
 } 
 
 model Response {
-  id                Int     @id @default(autoincrement())
-  user              User    @relation(references: [id], fields: [userId])
-  userId            Int     @unique
+  id                Int            @id @default(autoincrement())
+  user              User           @relation(references: [id], fields: [userId])
+  userId            Int     
   textContent       String
+  timestamp         DateTime       @default(now())
 }
 
 model TokenCount {
-  id                Int     @id @default(autoincrement())
-  user              User    @relation(references: [id], fields: [userId])
-  userId            Int     @unique
+  id                Int            @id @default(autoincrement())
+  user              User           @relation(references: [id], fields: [userId])
+  userId            Int     
   inputToken        Int
   outputToken       Int
-  timestamp         DateTime
+  timestamp         DateTime       @default(now())
 }
