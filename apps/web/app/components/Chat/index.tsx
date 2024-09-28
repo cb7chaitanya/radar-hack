@@ -47,10 +47,10 @@ export default function Chat() {
     );
     setInput("");
   };
-
+// className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600 animate-gradient-x"
   return (
     <div className="bg-gradient-to-b from-[#0b1120] to-[#0f172a] w-full min-h-screen flex flex-col text-white">
-      <div className="bg-gradient-to-r from-violet-400 to-purple-500 text-transparent bg-clip-text">
+      <div className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600 animate-gradient-x">
         <h1 className="text-left ml-8 mt-4 text-2xl font-bold">Bodhi</h1>
       </div>
 
