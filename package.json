@@ -10,7 +10,7 @@
     "devDependencies": {
         "prettier": "^3.2.5",
         "turbo": "^2.1.2",
-        "typescript": "^5.4.5"
+        "typescript": "^5.6.2"
     },
     "engines": {
         "node": ">=18"
@@ -22,11 +22,16 @@
     ],
     "dependencies": {
         "@google/generative-ai": "^0.19.0",
+        "@radix-ui/react-accordion": "^1.2.0",
+        "@shadcn/ui": "^0.0.4",
+        "axios": "^1.7.7",
         "clsx": "^2.1.1",
-        "framer-motion": "^11.7.0",
+        "framer-motion": "^11.9.0",
+        "install": "^0.13.0",
         "lucide-react": "^0.446.0",
+        "npm": "^10.8.3",
         "simplex-noise": "^4.0.3",
         "tailwind-merge": "^2.5.2",
-        "axios": "^1.7.7"
+        "ui": "^0.2.4"
     }
 }
