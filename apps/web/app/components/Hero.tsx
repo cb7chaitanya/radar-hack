@@ -10,8 +10,9 @@ export const Hero = () => {
   return (
     <>
       <div className="bg-gradient-to-r from-[#0F172A] via-[#2b145a]  to-gray-800 w-full h-screen flex flex-col justify-center items-center text-white">
+        <h1 className="text-left font-bold mt-4 ml-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600 animate-gradient-x">Bodhi</h1>
         <h1 className="text-5xl md:text-6xl font-bold mb-4 text-center">
-          Welcome to Bodhi
+          Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600 animate-gradient-x">Bodhi</span>
         </h1>
         <p className="text-lg md:text-xl mb-6 text-center max-w-lg">
           Foundational AI, Limitless Possibilities
