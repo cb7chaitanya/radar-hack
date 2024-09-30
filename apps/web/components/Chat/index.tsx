@@ -8,6 +8,7 @@ import { ArrowUp, Image, Paperclip, RefreshCw } from "lucide-react";
 import { useRef, useState } from "react";
 import PromptBox from "./PromtBox";
 import MessageBox from "./MessageBox";
+import { promptMessages, promptType } from "./prompt";
 
 export default function Chat() {
   const [input, setInput] = useState("");
@@ -77,26 +78,21 @@ export default function Chat() {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-gray-800 rounded-lg p-4 text-center">
-            <p className="text-lg text-white">
-              I want some tokens,can you assist me with that
-            </p>
-          </div>
-          <div className="bg-gray-800 rounded-lg p-4 text-center">
-            <p className="text-lg text-white">
-              Generate tokens worth $1000 USDC
-            </p>
-          </div>
-          <div className="bg-gray-800 rounded-lg p-4 text-center">
-            <p className="text-lg text-white">
-              I have solana can i exchange it with your tokens?
-            </p>
-          </div>
-          <div className="bg-gray-800 rounded-lg p-4 text-center">
-            <p className="text-lg text-white">
-              How much do i need to pay to get 1 token?
-            </p>
-          </div>
+          {promptMessages.length > 0 ? (
+            promptMessages.map((prompt: promptType, index: number) => (
+              <div
+                className="bg-gray-800 rounded-lg p-4 text-center cursor-pointer"
+                key={index}
+                onClick={() => {
+                  setInput(prompt.text);
+                }}
+              >
+                <p className="text-lg text-white">{prompt.text}</p>
+              </div>
+            ))
+          ) : (
+            <div>No prompts available</div>
+          )}
         </div>
 
         <button className="flex items-center text-gray-400 hover:text-white space-x-2">
@@ -116,6 +112,7 @@ export default function Chat() {
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            rows={4}
             placeholder="Ask whatever you want..."
             className="bg-transparent flex-grow text-white placeholder-gray-400 focus:outline-none text-lg"
             onKeyDown={handleEnterKey}
@@ -141,7 +138,7 @@ export default function Chat() {
               <span>Use Image</span>
             </button>
           </div>
-          <span>0/1000</span>
+          <span>{input.length}/1000</span>
         </div>
       </div>
     </div>
