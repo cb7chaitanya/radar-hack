@@ -5,25 +5,26 @@
 import { geminiStore } from "@/actions/storePrompt";
 import axios from "axios";
 import { ArrowUp, Image, Paperclip, RefreshCw } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import PromptBox from "./PromtBox";
 import MessageBox from "./MessageBox";
 
 export default function Chat() {
   const [input, setInput] = useState("");
-  const [responseArr, setResponseArr] = useState<string[]>([]);
-  const [promptArr, setPromptArr] = useState<string[]>([]);
-
   const [messages, setMessages] = useState<
     { type: "prompt" | "response"; content: string }[]
   >([]);
 
+  const submitButtonRef: any = useRef();
+
+  const isEmpty = (value: string) => value.trim().length === 0;
+
   const handleChatSend = async () => {
+    setInput("");
     setMessages((prevMessages) => [
       ...prevMessages,
       { type: "prompt", content: input },
     ]);
-    setPromptArr((arr) => [...arr, input]);
     const res = await axios({
       url: "http://localhost:3301/api/v1/gemini/prompt",
       method: "POST",
@@ -33,7 +34,6 @@ export default function Chat() {
         },
       },
     });
-    setResponseArr((arr) => [...arr, res.data.response.promptResult]);
     setMessages((prevMessages) => [
       ...prevMessages,
       { type: "response", content: res.data.response.promptResult },
@@ -45,9 +45,21 @@ export default function Chat() {
       res.data.response.usageMetadata.candidatesTokenCount,
       2,
     );
-    setInput("");
   };
-// className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600 animate-gradient-x"
+
+  const handleEnterKey = (e: any) => {
+    if (e.key === "Enter") {
+      if (e.shiftKey || isEmpty(input)) {
+        e.preventDefault();
+        setInput((prevInput) => prevInput + "\n");
+      } else {
+        e.preventDefault();
+        submitButtonRef.current.click();
+      }
+    }
+  };
+
+  // className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600 animate-gradient-x"
   return (
     <div className="bg-gradient-to-b from-[#0b1120] to-[#0f172a] w-full min-h-screen flex flex-col text-white">
       <div className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600 animate-gradient-x">
@@ -89,7 +101,7 @@ export default function Chat() {
 
         <button className="flex items-center text-gray-400 hover:text-white space-x-2">
           <RefreshCw />
-          <span>Refresh Prompts</span>
+          <span onClick={() => setMessages([])}>Refresh Prompts</span>
         </button>
         {/* Display Prompts */}
         {messages.map((message, index) =>
@@ -101,16 +113,18 @@ export default function Chat() {
         )}
 
         <div className="bg-gray-800 rounded-lg w-full p-4 flex items-center space-x-3">
-          <input
+          <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            type="text"
             placeholder="Ask whatever you want..."
             className="bg-transparent flex-grow text-white placeholder-gray-400 focus:outline-none text-lg"
+            onKeyDown={handleEnterKey}
           />
           <button
+            ref={submitButtonRef}
             className="bg-[#38bdf8] p-3 rounded-full"
             onClick={handleChatSend}
+            disabled={isEmpty(input)}
           >
             <ArrowUp />
           </button>
