@@ -4,15 +4,12 @@ import React, { useState } from "react";
 import { Brain, Moon, Sun, Wallet } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import { useTheme } from "next-themes";
+import TopupDialog from "../Topup";
 
 export default function LandingHeader() {
   const { theme, setTheme } = useTheme();
 
   const [walletAddress, setWalletAddress] = useState("");
-
-  const handleAddWallet = (address: string) => {
-    setWalletAddress(address);
-  };
 
   return (
     <header className="px-4 lg:px-6 h-16 flex items-center backdrop-blur-md bg-white/30 dark:bg-gray-900/30 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
@@ -59,6 +56,7 @@ export default function LandingHeader() {
           <Wallet className="w-4 h-4 mr-2" />
           {walletAddress ? "Wallet Connected" : "Add Wallet"}
         </Button>
+        <TopupDialog />
         <Button
           variant="ghost"
           size="icon"
