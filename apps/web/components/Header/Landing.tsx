@@ -1,15 +1,20 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
-import { Brain, Moon, Sun, Wallet } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Brain, Wallet,Sun,Moon } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import { useTheme } from "next-themes";
 import TopupDialog from "../Topup";
 
 export default function LandingHeader() {
   const { theme, setTheme } = useTheme();
-
   const [walletAddress, setWalletAddress] = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Ensure that the theme is only applied after the component is mounted
+    setMounted(true);
+  }, []);
 
   return (
     <header className="px-4 lg:px-6 h-16 flex items-center backdrop-blur-md bg-white/30 dark:bg-gray-900/30 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
@@ -64,11 +69,8 @@ export default function LandingHeader() {
           className="rounded-full"
           aria-label="Toggle dark mode"
         >
-          {theme === "dark" ? (
-            <Sun className="h-5 w-5" />
-          ) : (
-            <Moon className="h-5 w-5" />
-          )}
+          {/* Render only after mounted */}
+          {mounted && (theme === "dark" ? <Sun /> : <Moon />)}
         </Button>
       </nav>
     </header>

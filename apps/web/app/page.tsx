@@ -1,10 +1,11 @@
+
 import Hero from "@/components/Hero";
-import { Features } from "@/components/Features";
 import { HowItWorks } from "@/components/HowItWorks/HowItWorks";
 import { FAQ } from "@/components/FAQ/FAQ";
 import LandingHeader from "@/components/Header/Landing";
 import CallOut from "@/components/CallOut";
 import Footer from "@/components/Footer";
+import { FeaturesComp } from "@/components/Features/FeaturesComp";
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
       <LandingHeader />
       <main className="flex-1">
         <Hero />
-        <Features />
+        <FeaturesComp />
         <HowItWorks />
         <FAQ />
         {/* <CallOut /> */}

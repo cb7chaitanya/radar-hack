@@ -8,6 +8,7 @@ import { ArrowUp, Image, Paperclip, RefreshCw } from "lucide-react";
 import { useState } from "react";
 import PromptBox from "./PromtBox";
 import MessageBox from "./MessageBox";
+import { promptMessages, promptType } from "./prompt";
 
 export default function Chat() {
   const [input, setInput] = useState("");
@@ -46,7 +47,9 @@ export default function Chat() {
       res.data.response.usageMetadata.candidatesTokenCount,
       2,
     );
-  };
+}
+
+
   // className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600 animate-gradient-x"
   return (
     <div className="w-full min-h-screen flex flex-col text-white relative">
@@ -54,7 +57,7 @@ export default function Chat() {
         {messages.length === 0 && (
           <div>
             <h1 className="text-center font-bold text-4xl sm:text-5xl lg:text-6xl mb-4">
-              Hi there, <span className="text-[#a855f7]">John</span> <br /> What{" "}
+             <span className="dark:text-white text-gray-800 font-bold"> Hi there,</span> <span className="text-[#a855f7]">John</span> <br /> <span className="dark:text-white text-gray-800">What</span>{" "}
               <span className="text-[#38bdf8]">would like to know</span>?
             </h1>
 
@@ -63,26 +66,18 @@ export default function Chat() {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-              <div className="bg-gray-800 rounded-lg p-4 text-center rounded-[4px]">
+              {promptMessages.length>0 ? (
+              promptMessages.map((prompt:promptType,index:number)=> (
+              <div className="bg-gray-800 rounded-lg p-4 text-center" key={index}>
                 <p className="text-lg text-white">
-                  I want some tokens,can you assist me with that
+                 {prompt.text}
                 </p>
               </div>
-              <div className="bg-gray-800 rounded-lg p-4 text-center rounded-[4px]">
-                <p className="text-lg text-white">
-                  Generate tokens worth $1000 USDC
-                </p>
-              </div>
-              <div className="bg-gray-800 rounded-lg p-4 text-center rounded-[4px]">
-                <p className="text-lg text-white">
-                  I have solana can i exchange it with your tokens?
-                </p>
-              </div>
-              <div className="bg-gray-800 rounded-lg p-4 text-center rounded-[4px]">
-                <p className="text-lg text-white">
-                  How much do i need to pay to get 1 token?
-                </p>
-              </div>
+              ))
+            )
+              : <div>
+                No prompts available
+                </div>}
             </div>
           </div>
         )}
@@ -103,11 +98,11 @@ export default function Chat() {
         )}
 
         <div className="w-full">
-          <div className="bg-gray-800 rounded-[4px] w-full py-3 px-4 flex items-center space-x-3 mb-4">
+          <div className="bg-gray-800 rounded-[4px] w-full py-3 px-4 flex items-center space-x-3 mb-4 mt-8">
             <input
               value={input}
-              onChange={(e) => setInput(e.target.value)}
               type="text"
+              onChange={(e) => setInput(e.target.value)}
               placeholder="Ask whatever you want..."
               className="bg-transparent flex-grow text-white placeholder-gray-400 focus:outline-none text-lg"
             />

@@ -1,35 +1,8 @@
-import { HoverEffect } from "@repo/ui/components/ui/card-hover-effect";
 import { steps } from "./steps";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@repo/ui/components/ui/accordion";
+
 
 export const HowItWorks = () => {
-  const data = [
-    {
-      step: 1,
-      title: "Sign Up",
-      description: "Create your Bodhi account in seconds.",
-    },
-    {
-      step: 2,
-      title: "Recharge Wallet",
-      description: "Add funds to your wallet and receive Bodhi tokens.",
-    },
-    {
-      step: 3,
-      title: "Choose AI Model",
-      description: "Select from our range of premium AI models.",
-    },
-    {
-      step: 4,
-      title: "Start Chatting",
-      description: "Engage in AI conversations until your balance runs out.",
-    },
-  ];
+ 
   return (
     <section
       id="how-it-works"
@@ -40,7 +13,7 @@ export const HowItWorks = () => {
           How It Works
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {data.map((item, index) => (
+          {steps.map((item, index) => (
             <div key={index} className="flex flex-col items-center text-center">
               <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 text-white flex items-center justify-center text-2xl font-bold mb-4">
                 {item.step}

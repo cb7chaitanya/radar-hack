@@ -31,7 +31,8 @@ const Hero = () => {
             <Button
               className="rounded-[4px] bg-gradient-to-br from-purple-600 to-pink-600 text-white hover:text-purple-900 transition-all"
               size="lg"
-              onClick={() => router.push("/chat")}
+              onClick={() =>
+                router.push("/chat")}
             >
               Get Started
               <ChevronRight className="ml-2 h-4 w-4" />
@@ -58,7 +59,7 @@ const Hero = () => {
               Powered by Blockchain
             </p>
           </div>
-          <div className="absolute -top-12 -right-4 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg rounded-[4px]">
+          <div className="absolute -top-12 -right-4 bg-white dark:bg-gray-800 p-4 shadow-lg rounded-[4px]">
             <p className="text-sm font-semibold text-pink-600 dark:text-pink-400">
               Advanced AI Models
             </p>

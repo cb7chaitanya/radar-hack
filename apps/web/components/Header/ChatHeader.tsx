@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "@repo/ui/components/ui/button";
 import {
@@ -19,6 +19,16 @@ export default function ChatHeader() {
 
   const [model, setModel] = useState("gpt-4");
   const [walletAddress, setWalletAddress] = useState("");
+  
+  const [isMounted, setIsMounted] = useState(false); // Track component mount status
+
+  useEffect(() => {
+    setIsMounted(true); // Set mounted state to true after first render
+  }, []);
+
+  const handleThemeToggle = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
     <header className="px-4 lg:px-6 h-16 flex items-center backdrop-blur-md bg-white/30 dark:bg-gray-900/30 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
@@ -59,10 +69,12 @@ export default function ChatHeader() {
           className="rounded-full"
           aria-label="Toggle dark mode"
         >
-          {theme === "dark" ? (
-            <Sun className="h-5 w-5" />
-          ) : (
-            <Moon className="h-5 w-5" />
+          {isMounted && ( // Conditional rendering based on mount status
+            theme === "dark" ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )
           )}
         </Button>
       </div>
