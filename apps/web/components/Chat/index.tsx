@@ -58,6 +58,9 @@ export default function Chat() {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
+      if(input.trim().length===0){
+        setError("Please enter at least one letter to send a message.")
+      }
       if (e.shiftKey) {
         setInput((prevInput) => (prevInput) + "\n");
       } else {
