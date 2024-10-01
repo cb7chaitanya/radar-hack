@@ -27,7 +27,7 @@ export default function Chat() {
       { type: "prompt", content: input },
     ]);
     const res = await axios({
-      url: "http://localhost:3301/api/v1/gemini/prompt",
+      url: `${process.env.NEXT_PUBLIC_WEBHOOK_URL}/api/v1/gemini/prompt`,
       method: "POST",
       data: {
         query: {

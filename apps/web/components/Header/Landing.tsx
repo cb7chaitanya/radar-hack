@@ -5,11 +5,13 @@ import { Brain, Wallet,Sun,Moon } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import { useTheme } from "next-themes";
 import TopupDialog from "../Topup";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function LandingHeader() {
   const { theme, setTheme } = useTheme();
-  const [walletAddress, setWalletAddress] = useState("");
   const [mounted, setMounted] = useState(false);
+  const { connected } = useWallet();
 
   useEffect(() => {
     // Ensure that the theme is only applied after the component is mounted
@@ -53,15 +55,15 @@ export default function LandingHeader() {
           Balance:{" "}
           <span className="text-green-600 dark:text-green-400">100 BODHI</span>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          className="flex items-center rounded-[4px]"
-        >
-          <Wallet className="w-4 h-4 mr-2" />
-          {walletAddress ? "Wallet Connected" : "Add Wallet"}
-        </Button>
-        <TopupDialog />
+        <WalletMultiButton
+          style={{
+            backgroundColor: 'black',
+            height: '40px',
+            borderRadius: '8px',
+          }}
+          endIcon={<Wallet />}
+        />
+       {connected && <TopupDialog />}
         <Button
           variant="ghost"
           size="icon"
