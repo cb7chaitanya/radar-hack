@@ -7,7 +7,7 @@ import cors from "cors";
 const app = express();
 dotenv.config({ path: "../.env" });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 const apiRoute = "/api/v1";
 
 app.use(cors());
