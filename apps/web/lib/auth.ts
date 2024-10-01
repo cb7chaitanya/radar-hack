@@ -25,5 +25,8 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+    async redirect({ url, baseUrl }: { url: any; baseUrl: any }) {
+      return "http://localhost:3000/chat";
+    },
   },
 };
