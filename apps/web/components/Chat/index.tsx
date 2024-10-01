@@ -10,7 +10,7 @@ import PromptBox from "./PromtBox";
 import MessageBox from "./MessageBox";
 import { promptMessages, promptType } from "./prompt";
 
-export default function Chat() {
+export default function Chat({ userId }: { userId: string }) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<
     { type: "prompt" | "response"; content: string }[]
@@ -27,7 +27,7 @@ export default function Chat() {
       { type: "prompt", content: input },
     ]);
     const res = await axios({
-      url: "http://localhost:3301/api/v1/gemini/prompt",
+      url: `${process.env.NEXT_PUBLIC_WEBHOOK_URL}/api/v1/gemini/prompt`,
       method: "POST",
       data: {
         query: {
@@ -44,7 +44,7 @@ export default function Chat() {
       res.data.response.promptResult,
       res.data.response.usageMetadata.promptTokenCount,
       res.data.response.usageMetadata.candidatesTokenCount,
-      2,
+      userId,
     );
   };
 
@@ -78,21 +78,21 @@ export default function Chat() {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {promptMessages.length > 0 ? (
-                promptMessages.map((prompt: promptType, index: number) => (
-                  <div className="bg-gray-800 rounded-lg p-4 text-center cursor-pointer" key={index} onClick={()=>{
-                    setInput(prompt.text)
-                  }}>
-                    <p className="text-lg text-white">
-                      {prompt.text}
-                    </p>
-                  </div>
-                ))
-              ) : (
-                <div>
-                  No prompts available
-                </div>
-              )}
+          {promptMessages.length > 0 ? (
+            promptMessages.map((prompt: promptType, index: number) => (
+              <div
+                className="bg-gray-800 rounded-lg p-4 text-center cursor-pointer"
+                key={index}
+                onClick={() => {
+                  setInput(prompt.text);
+                }}
+              >
+                <p className="text-lg text-white">{prompt.text}</p>
+              </div>
+            ))
+          ) : (
+            <div>No prompts available</div>
+          )}
         </div>
 
         <button className="flex items-center text-gray-400 hover:text-white space-x-2">
