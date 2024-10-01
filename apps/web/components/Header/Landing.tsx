@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { Brain, Wallet,Sun,Moon } from "lucide-react";
+import { Brain, Wallet, Sun, Moon } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import { useTheme } from "next-themes";
 import TopupDialog from "../Topup";
@@ -51,19 +51,23 @@ export default function LandingHeader() {
         >
           Chat
         </Link>
-        <div className="text-sm font-medium">
-          Balance:{" "}
-          <span className="text-green-600 dark:text-green-400">100 BODHI</span>
-        </div>
+        {connected && (
+          <div className="text-sm font-medium">
+            Balance:{" "}
+            <span className="text-green-600 dark:text-green-400">
+              100 BODHI
+            </span>
+          </div>
+        )}
         <WalletMultiButton
           style={{
-            backgroundColor: 'black',
-            height: '40px',
-            borderRadius: '8px',
+            backgroundColor: theme === "dark" ? "#9333ea" : "#2b145a",
+            height: "40px",
+            borderRadius: "4px",
           }}
           endIcon={<Wallet />}
         />
-       {connected && <TopupDialog />}
+        {connected && <TopupDialog />}
         <Button
           variant="ghost"
           size="icon"
