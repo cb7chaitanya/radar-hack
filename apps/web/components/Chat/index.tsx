@@ -10,7 +10,7 @@ import PromptBox from "./PromtBox";
 import MessageBox from "./MessageBox";
 import { promptMessages, promptType } from "./prompt";
 
-export default function Chat() {
+export default function Chat({ userId }: { userId: string }) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<
     { type: "prompt" | "response"; content: string }[]
@@ -44,7 +44,7 @@ export default function Chat() {
       res.data.response.promptResult,
       res.data.response.usageMetadata.promptTokenCount,
       res.data.response.usageMetadata.candidatesTokenCount,
-      2,
+      userId,
     );
   };
 
