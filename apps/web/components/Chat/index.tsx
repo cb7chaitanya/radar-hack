@@ -15,6 +15,7 @@ export default function Chat({ userId }: { userId: string }) {
   const [messages, setMessages] = useState<
     { type: "prompt" | "response"; content: string }[]
   >([]);
+  const [tokenCount, setTokenCount] = useState(0);
 
   const submitButtonRef: any = useRef();
 
@@ -46,6 +47,19 @@ export default function Chat({ userId }: { userId: string }) {
       res.data.response.usageMetadata.candidatesTokenCount,
       userId,
     );
+  };
+
+  const handleTokenCount = async () => {
+    const res = await axios({
+      url: `${process.env.NEXT_PUBLIC_WEBHOOK_URL}/api/v1/gemini/tokencount`,
+      method: "POST",
+      data: {
+        query: {
+          prompt: input,
+        },
+      },
+    });
+    setTokenCount(res.data.response.totalTokens);
   };
 
   const handleEnterKey = (e: any) => {
@@ -138,6 +152,9 @@ export default function Chat({ userId }: { userId: string }) {
               <span>Use Image</span>
             </button>
           </div>
+          <button onClick={handleTokenCount}>
+            Check Token Count: {tokenCount}
+          </button>
           <span>{input.length}/1000</span>
         </div>
       </div>
