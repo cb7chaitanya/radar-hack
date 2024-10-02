@@ -31,8 +31,9 @@ const Hero = () => {
             <Button
               className="rounded-[4px] bg-gradient-to-br from-purple-600 to-pink-600 text-white hover:text-purple-900 transition-all"
               size="lg"
-              onClick={() =>
-                router.push("/chat")}
+              onClick={() => {
+                router.push("/chat");
+              }}
             >
               Get Started
               <ChevronRight className="ml-2 h-4 w-4" />
@@ -41,6 +42,7 @@ const Hero = () => {
               variant="outline"
               className="text-gray-600 dark:text-gray-400 border-purple-600 rounded-[4px] hover:text-purple-600 dark:hover:text-purple-300 transition-colors"
               size="lg"
+              onClick={() => console.log("== Learn More ==")}
             >
               Learn More
             </Button>

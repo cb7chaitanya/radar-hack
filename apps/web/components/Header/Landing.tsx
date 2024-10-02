@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { Brain, Wallet, Sun, Moon } from "lucide-react";
+import { Brain, Wallet, Sun, Moon, LogOut, LogIn } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import { useTheme } from "next-themes";
 import TopupDialog from "../Topup";
@@ -9,14 +9,21 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function LandingHeader() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const { connected } = useWallet();
 
+  const [mounted, setMounted] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
-    // Ensure that the theme is only applied after the component is mounted
+    if (theme) {
+      setIsDarkMode(theme === "dark");
+    }
     setMounted(true);
-  }, []);
+  }, [theme]);
+
+  if (!mounted) return null;
 
   return (
     <header className="px-4 lg:px-6 h-16 flex items-center backdrop-blur-md bg-white/30 dark:bg-gray-900/30 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
@@ -59,15 +66,30 @@ export default function LandingHeader() {
             </span>
           </div>
         )}
-        <WalletMultiButton
-          style={{
-            backgroundColor: theme === "dark" ? "#9333ea" : "#2b145a",
-            height: "40px",
-            borderRadius: "4px",
-          }}
-          endIcon={<Wallet />}
-        />
+        {!connected && (
+          <WalletMultiButton
+            style={{
+              backgroundColor: isDarkMode ? "#9333ea" : "#2b145a",
+              height: "40px",
+              borderRadius: "4px",
+            }}
+            endIcon={<Wallet />}
+          />
+        )}
+
         {connected && <TopupDialog />}
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setIsLoggedIn(!isLoggedIn)}
+        >
+          {isLoggedIn ? (
+            <LogOut className="w-4 h-4 mr-2" />
+          ) : (
+            <LogIn className="w-4 h-4 mr-2" />
+          )}
+          Log {isLoggedIn ? "Out" : "In"}
+        </Button>
         <Button
           variant="ghost"
           size="icon"
@@ -75,8 +97,7 @@ export default function LandingHeader() {
           className="rounded-full"
           aria-label="Toggle dark mode"
         >
-          {/* Render only after mounted */}
-          {mounted && (theme === "dark" ? <Sun /> : <Moon />)}
+          {isDarkMode ? <Sun /> : <Moon />}
         </Button>
       </nav>
     </header>

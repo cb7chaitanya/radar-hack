@@ -19,7 +19,14 @@ const config = {
       },
     },
     extend: {
-      colors: {},
+      colors: {
+        primary: {
+          700: "#9333ea",
+          800: "#2b145a",
+          900: "#0F172A",
+        },
+        secondary: "#",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

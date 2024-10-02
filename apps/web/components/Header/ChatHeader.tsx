@@ -1,6 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@repo/ui/components/ui/button";
 import {
   Select,
@@ -9,22 +8,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/components/ui/select";
-import { Brain, Moon, Sun, Wallet } from "lucide-react";
+import { Brain, Moon, Sun, Wallet, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import TopupDialog from "../Topup";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function ChatHeader() {
   const { theme, setTheme } = useTheme();
+  const { connected } = useWallet();
 
   const [model, setModel] = useState("gpt-4");
   const [walletAddress, setWalletAddress] = useState("");
-  
-  const [isMounted, setIsMounted] = useState(false); // Track component mount status
+
+  const [isMounted, setIsMounted] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true); // Set mounted state to true after first render
-  }, []);
+    if (theme) {
+      setIsDarkMode(theme === "dark");
+    }
+    setIsMounted(true);
+  }, [theme]);
 
   const handleThemeToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -53,15 +59,15 @@ export default function ChatHeader() {
           Balance:{" "}
           <span className="text-green-600 dark:text-green-400">100 BODHI</span>
         </div>
+        {connected && <TopupDialog />}
         <Button
-          variant="outline"
+          variant="ghost"
           size="sm"
-          className="flex items-center rounded-[4px]"
+          onClick={() => setIsLoggedIn(!isLoggedIn)}
         >
-          <Wallet className="w-4 h-4 mr-2" />
-          {walletAddress ? "Wallet Connected" : "Add Wallet"}
+          <LogOut className="w-4 h-4 mr-2" />
+          Log Out
         </Button>
-        <TopupDialog />
         <Button
           variant="ghost"
           size="icon"
@@ -69,13 +75,12 @@ export default function ChatHeader() {
           className="rounded-full"
           aria-label="Toggle dark mode"
         >
-          {isMounted && ( // Conditional rendering based on mount status
-            theme === "dark" ? (
+          {isMounted && // Conditional rendering based on mount status
+            (theme === "dark" ? (
               <Sun className="h-5 w-5" />
             ) : (
               <Moon className="h-5 w-5" />
-            )
-          )}
+            ))}
         </Button>
       </div>
     </header>
