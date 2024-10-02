@@ -95,7 +95,7 @@ export default function Chat({ userId }: { userId: string }) {
           {promptMessages.length > 0 ? (
             promptMessages.map((prompt: promptType, index: number) => (
               <div
-                className="bg-gray-800 rounded-lg p-4 text-center cursor-pointer"
+                className="bg-gray-800 rounded-lg p-4 text-center cursor-pointer rounded-[4px] dark:rounded-[4px]"
                 key={index}
                 onClick={() => {
                   setInput(prompt.text);
@@ -122,7 +122,7 @@ export default function Chat({ userId }: { userId: string }) {
           ),
         )}
 
-        <div className="bg-gray-800 rounded-lg w-full p-4 flex items-center space-x-3">
+        <div className="bg-gray-800 rounded-lg w-full p-4 flex items-center space-x-3 rounded-[4px] dark:rounded-[4px]">
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
