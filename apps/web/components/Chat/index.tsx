@@ -135,7 +135,7 @@ export default function Chat({ userId }: { userId: string }) {
         )}
 
         {/* Display Prompts */}
-        <div className="flex-grow overflow-auto w-full mb-4">
+        <div className="flex-grow overflow-auto w-full mb-10 pb-20">
           {messages?.map((message, index) =>
             message?.type === "prompt" ? (
               <PromptBox key={index} prompt={message?.content} />
@@ -143,6 +143,7 @@ export default function Chat({ userId }: { userId: string }) {
               <MessageBox key={index} message={message.content} />
             ),
           )}
+          <div ref={scrollToBottomRef} />
         </div>
 
         {/* Input box section */}
@@ -178,7 +179,7 @@ export default function Chat({ userId }: { userId: string }) {
           </div>
 
           {false && (
-            <div className="flex items-center justify-between w-full text-gray-400">
+            <div className="flex items-center justify-between w-full text-gray-400 mt-2">
               <div className="flex items-center space-x-4">
                 <button className="flex items-center space-x-2">
                   <Paperclip />
@@ -192,7 +193,6 @@ export default function Chat({ userId }: { userId: string }) {
             </div>
           )}
         </div>
-        <div ref={scrollToBottomRef} />
       </div>
     </div>
   );
