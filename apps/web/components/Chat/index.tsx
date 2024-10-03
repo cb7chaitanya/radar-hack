@@ -20,9 +20,11 @@ export default function Chat({ userId }: { userId: string }) {
 
   const submitButtonRef: any = useRef();
 
+  const scrollToBottomRef: any = useRef(null);
+
   const isEmpty = (value: string) => value.trim().length === 0;
 
-  const handleChatSend = async () => {
+  const handleChatSend = async (el: any) => {
     setInput("");
     setMessages((prevMessages) => [
       ...prevMessages,
@@ -48,6 +50,7 @@ export default function Chat({ userId }: { userId: string }) {
       res.data.response.usageMetadata.candidatesTokenCount,
       userId,
     );
+    scrollToBottomRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleTokenCount = async () => {
@@ -153,23 +156,25 @@ export default function Chat({ userId }: { userId: string }) {
             </div>
           )}
 
-          <div className="bg-gray-100 dark:bg-gray-800 w-full p-4 flex items-center space-x-3 rounded-[4px] mb-4">
-            <textarea
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              rows={4}
-              placeholder="Ask whatever you want..."
-              className="bg-transparent flex-grow text-gray-800 dark:text-white placeholder-gray-400 focus:outline-none text-lg"
-              onKeyDown={handleEnterKey}
-            />
-            <button
-              ref={submitButtonRef}
-              className="bg-[#38bdf8] p-3 rounded-full"
-              onClick={handleChatSend}
-              disabled={isEmpty(input)}
-            >
-              <ArrowUp />
-            </button>
+          <div className="fixed bottom-0 left-0 right-0">
+            <div className="max-w-3xl mx-auto flex items-center space-x-3 bg-gray-100 dark:bg-gray-800 p-4 mb-2">
+              <textarea
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                rows={4}
+                placeholder="Ask whatever you want..."
+                className="bg-transparent flex-grow text-gray-800 dark:text-white placeholder-gray-400 focus:outline-none text-lg"
+                onKeyDown={handleEnterKey}
+              />
+              <button
+                ref={submitButtonRef}
+                className="bg-[#38bdf8] p-3 rounded-full"
+                onClick={handleChatSend}
+                disabled={isEmpty(input)}
+              >
+                <ArrowUp />
+              </button>
+            </div>
           </div>
 
           {false && (
@@ -187,6 +192,7 @@ export default function Chat({ userId }: { userId: string }) {
             </div>
           )}
         </div>
+        <div ref={scrollToBottomRef} />
       </div>
     </div>
   );

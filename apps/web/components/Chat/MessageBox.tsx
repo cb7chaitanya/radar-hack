@@ -9,12 +9,16 @@ interface Props {
 }
 const MessageBox: FC<Props> = ({ message }) => {
   return (
-    <div className="flex flex-col w-full items-start">
+    <div className="">
+    <div className="ml-20">
       <Bot className="w-5 h-5 text-white" />
-      <div className="max-w-[80%] bg-gradient-to-br from-purple-600 to-pink-600 px-4 pb-4 rounded-[4px]">
+      </div>
+      <div className="items-center flex flex-col w-full">
+      <div className="max-w-[80%] bg-gradient-to-br from-purple-600 to-pink-600 px-4 w-fit pb-3 rounded-[4px]">
         <TextGenerateEffect words={message} duration={0.5} className="" />
       </div>
-    </div>
+      </div>
+      </div>
   );
 };
 
