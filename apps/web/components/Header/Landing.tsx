@@ -7,7 +7,7 @@ import { useTheme } from "next-themes";
 import TopupDialog from "../Topup";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { signOut, signIn } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { navitems } from "./navitems";
 
@@ -15,29 +15,18 @@ export default function LandingHeader() {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const { connected } = useWallet();
   const router = useRouter();
+  const session = useSession();
 
   const [mounted, setMounted] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSignOut = async () => {
     await signOut();
     router.push("/");
-    setIsLoggedIn(false);
   };
 
-  const handleGoogleLogin = async () => {
-    try {
-      const signInRes = await signIn("google", {
-        callbackUrl: "/",
-        redirect: false,
-      });
-      if (signInRes) {
-        setIsLoggedIn(true);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSignIn = async () => {
+    router.push("/login");
   };
 
   useEffect(() => {
@@ -91,18 +80,24 @@ export default function LandingHeader() {
         )}
 
         {connected && <TopupDialog />}
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => (isLoggedIn ? handleSignOut() : handleGoogleLogin())}
-        >
-          {isLoggedIn ? (
-            <LogOut className="w-4 h-4 mr-2" />
-          ) : (
-            <LogIn className="w-4 h-4 mr-2" />
-          )}
-          Log {isLoggedIn ? "Out" : "In"}
-        </Button>
+        {session.status !== "loading" && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() =>
+              session.status === "authenticated"
+                ? handleSignOut()
+                : handleSignIn()
+            }
+          >
+            {session.status === "authenticated" ? (
+              <LogOut className="w-4 h-4 mr-2" />
+            ) : (
+              <LogIn className="w-4 h-4 mr-2" />
+            )}
+            Log {session.status === "authenticated" ? "Out" : "In"}
+          </Button>
+        )}
         <Button
           variant="ghost"
           size="icon"
