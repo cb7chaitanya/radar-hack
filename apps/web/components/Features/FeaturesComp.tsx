@@ -16,7 +16,7 @@ export const FeaturesComp = () => {
             features.map((feature: any, index: number) => (
               <div
                 key={index}
-                className="flex flex-col rounded-[4px] items-center text-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow dark:rounded-[4px]"
+                className="flex flex-col rounded-[4px] items-center text-center p-6 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow"
               >
                 <div className="mb-4 h-12 w-12 text-purple-600 dark:text-purple-400">
                   <feature.icon />
