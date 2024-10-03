@@ -5,6 +5,8 @@ import { Brain, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { signIn } from "next-auth/react";
+import { redirect } from "next/dist/server/api-utils";
 
 export default function LoginPage() {
   const { theme, setTheme } = useTheme();
@@ -13,8 +15,15 @@ export default function LoginPage() {
   const [mounted, setMounted] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const handleGoogleLogin = () => {
-    console.log("Connecting with Google");
+  const handleGoogleLogin = async () => {
+    try {
+      const signInRes = await signIn("google", {
+        callbackUrl: "/chat",
+        redirect: false,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {

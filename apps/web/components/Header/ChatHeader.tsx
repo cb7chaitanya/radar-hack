@@ -13,10 +13,13 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import TopupDialog from "../Topup";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function ChatHeader() {
   const { theme, setTheme } = useTheme();
   const { connected } = useWallet();
+  const router = useRouter();
 
   const [model, setModel] = useState("gpt-4");
   const [walletAddress, setWalletAddress] = useState("");
@@ -34,6 +37,11 @@ export default function ChatHeader() {
 
   const handleThemeToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.push("/");
   };
 
   return (
@@ -60,11 +68,7 @@ export default function ChatHeader() {
           <span className="text-green-600 dark:text-green-400">100 BODHI</span>
         </div>
         {connected && <TopupDialog />}
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => setIsLoggedIn(!isLoggedIn)}
-        >
+        <Button variant="ghost" size="sm" onClick={() => handleSignOut()}>
           <LogOut className="w-4 h-4 mr-2" />
           Log Out
         </Button>
