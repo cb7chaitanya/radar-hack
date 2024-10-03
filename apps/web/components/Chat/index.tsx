@@ -9,6 +9,9 @@ import { useRef, useState } from "react";
 import PromptBox from "./PromtBox";
 import MessageBox from "./MessageBox";
 import { promptMessages, promptType } from "./prompt";
+import { remark } from "remark"
+import html from "remark-html"
+import { htmlToText } from "html-to-text";
 
 export default function Chat({ userId }: { userId: string }) {
   const [input, setInput] = useState("");
@@ -39,9 +42,14 @@ export default function Chat({ userId }: { userId: string }) {
         },
       },
     });
+    const processedContent = await remark().use(html).process(res.data.response.promptResult);
+
+    const contentHtml = processedContent.toString();
+
+    const finalResponse = htmlToText(contentHtml)
     setMessages((prevMessages) => [
       ...prevMessages,
-      { type: "response", content: res.data.response.promptResult },
+      { type: "response", content: finalResponse },
     ]);
     await geminiStore(
       input,

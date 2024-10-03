@@ -23,9 +23,13 @@
     "dependencies": {
         "@google/generative-ai": "^0.19.0",
         "@next-auth/prisma-adapter": "^1.0.7",
+        "@types/html-to-text": "^9.0.4",
+        "html-to-text": "^9.0.5",
         "install": "^0.13.0",
         "next-auth": "^4.24.8",
         "npm": "^10.8.3",
+        "remark": "^15.0.1",
+        "remark-html": "^16.0.1",
         "simplex-noise": "^4.0.3",
         "ui": "^0.2.4"
     }
