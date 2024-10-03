@@ -35,10 +35,6 @@ export default function ChatHeader() {
     setIsMounted(true);
   }, [theme]);
 
-  const handleThemeToggle = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-
   const handleSignOut = async () => {
     await signOut();
     router.push("/");

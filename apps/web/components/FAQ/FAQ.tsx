@@ -19,28 +19,7 @@ export function FAQ() {
           collapsible
           className="w-full max-w-3xl mx-auto"
         >
-          {[
-            {
-              question: "How do I recharge my wallet?",
-              answer:
-                "You can recharge your wallet using various payment methods including credit/debit cards and cryptocurrencies. Simply go to your account dashboard and click on 'Recharge Wallet'.",
-            },
-            {
-              question: "What AI models are available?",
-              answer:
-                "We offer access to the latest versions of popular AI models such as GPT, Gemini, and LLaMA. The available models may vary and are regularly updated.",
-            },
-            {
-              question: "How does the pay-as-you-go model work?",
-              answer:
-                "Your wallet balance is deducted based on the duration and complexity of your AI interactions. You only pay for what you use, and you can recharge your wallet at any time.",
-            },
-            {
-              question: "Is my data secure?",
-              answer:
-                "Yes, we take data security very seriously. All conversations are encrypted, and we do not store the content of your chats. Your wallet transactions are secured by blockchain technology.",
-            },
-          ].map((item, index) => (
+          {faqs.map((item, index) => (
             <AccordionItem key={index} value={`item-${index + 1}`}>
               <AccordionTrigger className="text-left">
                 {item.question}

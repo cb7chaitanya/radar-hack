@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { Brain, Wallet, Sun, Moon, LogOut, LogIn } from "lucide-react";
+import { Brain, Wallet, Sun, Moon, LogOut, LogIn, Divide } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import { useTheme } from "next-themes";
 import TopupDialog from "../Topup";
@@ -9,6 +9,7 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { signOut, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { navitems } from "./navitems";
 
 export default function LandingHeader() {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -57,30 +58,19 @@ export default function LandingHeader() {
         </span>
       </Link>
       <nav className="ml-auto flex items-center gap-4 sm:gap-6">
-        <Link
-          className="text-sm font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-          href="#features"
-        >
-          Features
-        </Link>
-        <Link
-          className="text-sm font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-          href="#how-it-works"
-        >
-          How It Works
-        </Link>
-        <Link
-          className="text-sm font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-          href="#faq"
-        >
-          FAQ
-        </Link>
-        <Link
-          className="text-sm font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-          href="/chat"
-        >
-          Chat
-        </Link>
+        {navitems.length > 0 ? (
+          navitems.map((item: any) => (
+            <Link
+              className="text-sm font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+              href={item.href}
+              key={item.id}
+            >
+              {item.name}
+            </Link>
+          ))
+        ) : (
+          <div>No items</div>
+        )}
         {connected && (
           <div className="text-sm font-medium">
             Balance:{" "}
