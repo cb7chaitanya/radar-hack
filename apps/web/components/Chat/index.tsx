@@ -42,10 +42,13 @@ export default function Chat({ userId }: { userId: string }) {
         },
       },
     });
+
+      // Converts markdown into HTML string via remark
     const processedContent = await remark().use(html).process(res.data.response.promptResult);
 
     const contentHtml = processedContent.toString();
 
+    // Converts html to text
     const finalResponse = htmlToText(contentHtml)
     setMessages((prevMessages) => [
       ...prevMessages,
