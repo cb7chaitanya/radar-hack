@@ -24,7 +24,7 @@ export default function Chat({ userId }: { userId: string }) {
 
   const isEmpty = (value: string) => value.trim().length === 0;
 
-  const handleChatSend = async (el: any) => {
+  const handleChatSend = async () => {
     setInput("");
     setMessages((prevMessages) => [
       ...prevMessages,
