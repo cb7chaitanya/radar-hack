@@ -96,37 +96,6 @@ export default function Chat({ userId }: { userId: string }) {
   // className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600 animate-gradient-x"
   return (
     <div className="w-full min-h-screen flex flex-col text-white overflow-hidden">
-      {/* Token Usage */}
-      <div className="fixed top-[60px] left-0 right-0 shadow-md p-2 z-10 backdrop-blur-md">
-        <div className="max-w-3xl mx-auto flex items-center justify-between">
-          <div className="flex items-center">
-            <h2 className="text-[16px] font-semibold flex items-center mr-6 text-primary-700 dark:text-white">
-              <Zap className="w-5 h-5 text-yellow-500 mr-2" />
-              Token Usage
-            </h2>
-            <span className="text-sm text-gray-600 dark:text-white">
-              {input.length} / {maxTokens} tokens remaining
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600 dark:text-white mr-6">
-              {((input.length / maxTokens) * 100).toFixed(1)}%
-            </span>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsRefreshing(!isRefreshing)}
-              disabled={isRefreshing}
-              className="text-purple-300 rounded-[4px] bg-gradient-to-r from-blue-500 to-blue-700 border-0"
-            >
-              <RefreshCw
-                className={`w-4 h-4 mr-1  ${isRefreshing ? "animate-spin" : ""}`}
-              />
-              <Coins className="w-4 h-4" />
-            </Button>
-          </div>
-        </div>
-      </div>
       <div className="mt-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center h-full py-10">
         {messages?.length === 0 && (
           <div className="space-y-8 mb-8 pb-40">
