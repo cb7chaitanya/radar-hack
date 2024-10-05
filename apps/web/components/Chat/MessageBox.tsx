@@ -37,7 +37,7 @@ const MessageBox: FC<Props> = ({ message }) => {
       </div>
       <div className=" flex flex-col w-full">
         <div className="max-w-[80%] bg-gradient-to-br from-purple-600 to-pink-600 px-4 w-fit pb-3 rounded-[4px]">
-          <TextGenerateEffect words={message} duration={0.5} className="" />
+          <TextGenerateEffect words={message} duration={0} className="" />
         </div>
         <div className="flex">
           {!isCopy ? (
