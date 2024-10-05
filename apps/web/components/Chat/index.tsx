@@ -4,14 +4,15 @@
 
 import { geminiStore } from "@/actions/storePrompt";
 import axios from "axios";
-import { ArrowUp, Image, Paperclip, RefreshCw, Zap } from "lucide-react";
+import { ArrowUp, Image, Paperclip, RefreshCw, Zap, Coins } from "lucide-react";
 import { useRef, useState } from "react";
 import PromptBox from "./PromtBox";
 import MessageBox from "./MessageBox";
 import { promptMessages, promptType } from "./prompt";
-import { remark } from "remark"
-import html from "remark-html"
+import { remark } from "remark";
+import html from "remark-html";
 import { htmlToText } from "html-to-text";
+import { Button } from "@repo/ui/components/ui/button";
 
 export default function Chat({ userId }: { userId: string }) {
   const [input, setInput] = useState("");
@@ -20,6 +21,7 @@ export default function Chat({ userId }: { userId: string }) {
   >([]);
   const [tokenCount, setTokenCount] = useState(0);
   const [maxTokens, setMaxTokens] = useState(1000);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const submitButtonRef: any = useRef();
 
@@ -43,13 +45,15 @@ export default function Chat({ userId }: { userId: string }) {
       },
     });
 
-      // Converts markdown into HTML string via remark
-    const processedContent = await remark().use(html).process(res.data.response.promptResult);
+    // Converts markdown into HTML string via remark
+    const processedContent = await remark()
+      .use(html)
+      .process(res.data.response.promptResult);
 
     const contentHtml = processedContent.toString();
 
     // Converts html to text
-    const finalResponse = htmlToText(contentHtml)
+    const finalResponse = htmlToText(contentHtml);
     setMessages((prevMessages) => [
       ...prevMessages,
       { type: "response", content: finalResponse },
@@ -105,9 +109,21 @@ export default function Chat({ userId }: { userId: string }) {
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600 dark:text-white">
+            <span className="text-sm text-gray-600 dark:text-white mr-6">
               {((input.length / maxTokens) * 100).toFixed(1)}%
             </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsRefreshing(!isRefreshing)}
+              disabled={isRefreshing}
+              className="text-purple-300 rounded-[4px] bg-gradient-to-r from-blue-500 to-blue-700 border-0"
+            >
+              <RefreshCw
+                className={`w-4 h-4 mr-1  ${isRefreshing ? "animate-spin" : ""}`}
+              />
+              <Coins className="w-4 h-4" />
+            </Button>
           </div>
         </div>
       </div>
@@ -169,7 +185,7 @@ export default function Chat({ userId }: { userId: string }) {
           )}
 
           <div className="fixed bottom-0 left-0 right-0">
-            <div className="max-w-3xl mx-auto flex items-center space-x-3 bg-gray-100 dark:bg-gray-800 p-4 mb-2">
+            <div className="max-w-3xl mx-auto flex items-center space-x-3 bg-gray-200 dark:bg-gray-800 p-4 mb-2 rounded-[4px] border border-gray-400 dark:border-gray-600">
               <textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -180,7 +196,7 @@ export default function Chat({ userId }: { userId: string }) {
               />
               <button
                 ref={submitButtonRef}
-                className="bg-[#38bdf8] p-3 rounded-full"
+                className="bg-gradient-to-br from-purple-600 to-pink-600 p-3 rounded-full"
                 onClick={handleChatSend}
                 disabled={isEmpty(input)}
               >

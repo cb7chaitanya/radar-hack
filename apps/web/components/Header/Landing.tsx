@@ -22,7 +22,6 @@ export default function LandingHeader() {
 
   const handleSignOut = async () => {
     await signOut();
-    router.push("/");
   };
 
   const handleSignIn = async () => {

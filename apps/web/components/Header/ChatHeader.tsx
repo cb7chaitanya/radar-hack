@@ -15,6 +15,7 @@ import TopupDialog from "../Topup";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import TokenUsage from "../TokenUsage";
 
 export default function ChatHeader() {
   const { theme, setTheme } = useTheme();
@@ -63,6 +64,7 @@ export default function ChatHeader() {
           Balance:{" "}
           <span className="text-green-600 dark:text-green-400">100 BODHI</span>
         </div>
+        <TokenUsage />
         {connected && <TopupDialog />}
         <Button variant="ghost" size="sm" onClick={() => handleSignOut()}>
           <LogOut className="w-4 h-4 mr-2" />
