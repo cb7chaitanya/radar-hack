@@ -32,28 +32,32 @@ const MessageBox: FC<Props> = ({ message }) => {
   };
   return (
     <div className="">
-      <div className="ml-20 md:ml-24">
+      <div className="">
         <Bot className="w-5 h-5 text-white" />
       </div>
-      <div className="items-center flex flex-col w-full">
+      <div className=" flex flex-col w-full">
         <div className="max-w-[80%] bg-gradient-to-br from-purple-600 to-pink-600 px-4 w-fit pb-3 rounded-[4px]">
+          <TextGenerateEffect words={message} duration={0.5} className="" />
+        </div>
+        <div className="flex">
           {!isCopy ? (
             <div
-              className="flex flex-row gap-2 items-end cursor-pointer mt-2 bg-gray-800 w-fit px-2 py-2"
+              className="cursor-pointer flex flex-row items-center mt-1"
               onClick={handleCopy}
             >
-              Copy
-              <div className="mt-2">
-                <Copy />
-              </div>
+              <span className="text-sm md:text-md mr-2 text-gray-400">
+                Copy
+              </span>
+              <Copy size={14} className="text-gray-400" />
             </div>
           ) : (
-            <div className="flex flex-row items-center mt-2  bg-gray-800 w-fit px-2 py-2">
-              <Check className="text-white" />
-              <span className="text-white ml-2">Copied!</span>
+            <div className="cursor-pointer flex flex-row items-center mt-1">
+              <span className="text-sm md:text-md mr-2 text-gray-400">
+                Copied!
+              </span>
+              <Check size={14} className="text-gray-400" />
             </div>
           )}
-          <TextGenerateEffect words={message} duration={0.5} className="" />
         </div>
       </div>
     </div>

@@ -6,7 +6,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { signIn } from "next-auth/react";
-import { redirect } from "next/dist/server/api-utils";
+
+const screenWidth = window.screen.width;
+const screenHeight = window.screen.height;
+
+console.log("screenWidth", screenWidth / 3);
+console.log("screenHeight", screenHeight / 3);
 
 export default function LoginPage() {
   const { theme, setTheme } = useTheme();
@@ -110,9 +115,7 @@ export default function LoginPage() {
               <Image
                 src={require("@/assets/gp2.png")}
                 alt="AI Chat Illustration"
-                width={400}
-                height={400}
-                className="object-cover object-contain"
+                className="object-cover object-contain w-[300px] h-[300px] lg:w-[400px] lg:h-[400px]"
               />
               <div className="absolute bottom-4 left-4 bg-white dark:bg-gray-800 rounded-[4px] p-4 shadow-lg">
                 <p className="text-sm font-semibold text-purple-600 dark:text-purple-400">

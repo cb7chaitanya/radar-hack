@@ -11,10 +11,10 @@ const Hero = () => {
   const router = useRouter();
 
   return (
-    <section className="w-full flex flex-col justify-center px-4 md:px-6 h-screen">
+    <section className="w-full flex flex-col justify-center px-4 md:px-6 h-[40rem] lg:h-screen">
       <div className="container mx-auto flex flex-col md:flex-row items-center gap-8">
         <div className="flex-1 text-center md:text-left">
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none mb-4 text-gray-800 dark:text-white">
+          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-5xl/none mb-4 text-gray-800 dark:text-white">
             Unlock the Power of AI with{" "}
             <span className="ml-2 font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400">
               Bodhi
@@ -29,7 +29,7 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <Button
-              className="rounded-[4px] bg-gradient-to-br from-purple-600 to-pink-600 text-white hover:text-purple-900 transition-all"
+              className="rounded-[4px] bg-gradient-to-br from-purple-600 to-pink-600 text-white hover:text-purple-900 transition-all px-[1rem] lg:px-[2rem]"
               size="lg"
               onClick={() => {
                 router.push("/chat");
@@ -40,7 +40,7 @@ const Hero = () => {
             </Button>
             <Button
               variant="outline"
-              className="text-gray-600 dark:text-gray-400 border-purple-600 rounded-[4px] hover:text-purple-600 dark:hover:text-purple-300 transition-colors"
+              className="text-gray-600 dark:text-gray-400 border-purple-600 rounded-[4px] hover:text-purple-600 dark:hover:text-purple-300 transition-colors px-[1rem] lg:px-[2rem]"
               size="lg"
               onClick={() => console.log("== Learn More ==")}
             >
@@ -48,7 +48,7 @@ const Hero = () => {
             </Button>
           </div>
         </div>
-        <div className="flex-1 relative">
+        <div className="flex-1 relative mt-20 md:mt-0">
           <Image
             src={require("@/assets/chatpage.png")}
             alt="AI Chat Illustration"
