@@ -13,6 +13,7 @@ import { remark } from "remark";
 import html from "remark-html";
 import { htmlToText } from "html-to-text";
 import { Button } from "@repo/ui/components/ui/button";
+import { tokenToBodhiCost } from "@/utils/calculateCost";
 
 export default function Chat({ userId }: { userId: string }) {
   const [input, setInput] = useState("");
@@ -64,6 +65,10 @@ export default function Chat({ userId }: { userId: string }) {
       res.data.response.usageMetadata.promptTokenCount,
       res.data.response.usageMetadata.candidatesTokenCount,
       userId,
+    );
+    const bodhiPayable = tokenToBodhiCost(
+      res.data.response.usageMetadata.promptTokenCount,
+      res.data.response.usageMetadata.candidatesTokenCount,
     );
     scrollToBottomRef.current?.scrollIntoView({ behavior: "smooth" });
   };
