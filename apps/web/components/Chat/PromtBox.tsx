@@ -13,7 +13,7 @@ const PromptBox: FC<Props> = ({ prompt }) => {
     <div className="flex flex-col items-end w-full">
       <div className="max-w-[80%] flex flex-col">
         <User className="w-5 h-5 text-white " />
-        <div className="bg-[#38bdf8] bg-gradient-to-br from-sky-600 to-blue-800 px-4 pb-4 rounded-[4px]">
+        <div className="bg-gradient-to-br from-sky-600 to-blue-800 px-4 pb-4 rounded-[4px]">
           <TextGenerateEffect words={prompt} duration={0} className="" />
         </div>
       </div>

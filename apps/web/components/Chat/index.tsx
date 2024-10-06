@@ -131,16 +131,18 @@ export default function Chat({ userId }: { userId: string }) {
         )}
 
         {/* Display Prompts */}
-        <div className="flex-grow overflow-auto w-full mb-16 pb-20 px-6">
-          {messages?.map((message, index) =>
-            message?.type === "prompt" ? (
-              <PromptBox key={index} prompt={message?.content} />
-            ) : (
-              <MessageBox key={index} message={message.content} />
-            ),
-          )}
-          <div ref={scrollToBottomRef} />
-        </div>
+        {messages?.length > 0 && (
+          <div className="flex-grow overflow-auto w-full mb-16 pb-20 px-6">
+            {messages?.map((message, index) =>
+              message?.type === "prompt" ? (
+                <PromptBox key={index} prompt={message?.content} />
+              ) : (
+                <MessageBox key={index} message={message.content} />
+              ),
+            )}
+            <div ref={scrollToBottomRef} />
+          </div>
+        )}
 
         {/* Input box section */}
         <div className="w-full">
@@ -164,7 +166,7 @@ export default function Chat({ userId }: { userId: string }) {
               />
               <button
                 ref={submitButtonRef}
-                className="bg-[#38bdf8] p-2 md:p-3 rounded-full"
+                className="bg-gradient-to-br from-purple-600 to-pink-600 p-2 md:p-3 rounded-full"
                 onClick={handleChatSend}
                 disabled={isEmpty(input)}
               >
