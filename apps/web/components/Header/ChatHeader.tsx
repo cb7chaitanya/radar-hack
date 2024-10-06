@@ -17,19 +17,21 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import TokenUsage from "../TokenUsage";
 
-export default function ChatHeader() {
+interface Props {
+  handleTokenUsage: ()=> void;
+}
+
+export default function ChatHeader({handleTokenUsage}:Props) {
   const { theme, setTheme } = useTheme();
   const { connected } = useWallet();
   const router = useRouter();
 
   const [model, setModel] = useState("gpt-4");
-  const [walletAddress, setWalletAddress] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [mounted, setMounted] = useState(false);
 
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (theme) {
@@ -66,7 +68,7 @@ export default function ChatHeader() {
                 <SelectItem value="llama">LLaMA</SelectItem>
               </SelectContent>
             </Select>
-            <TokenUsage />
+            <TokenUsage TokenUsage={handleTokenUsage}/>
             {connected && <TopupDialog />}
           </nav>
           {connected && (
@@ -137,7 +139,7 @@ export default function ChatHeader() {
               <SelectItem value="llama">LLaMA</SelectItem>
             </SelectContent>
           </Select>
-          <TokenUsage />
+          <TokenUsage TokenUsage={handleTokenUsage}/>
           {connected && <TopupDialog />}
           <Button variant="ghost" size="sm" onClick={() => handleSignOut()}>
             <LogOut className="w-4 h-4 mr-2" />

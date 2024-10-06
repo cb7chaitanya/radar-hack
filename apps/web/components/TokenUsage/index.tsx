@@ -3,33 +3,24 @@ import { BarChart2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@repo/ui/components/ui/dialog";
 import { Button } from "@repo/ui/components/ui/button";
 
-export default function TokenUsage() {
+interface Props {
+  TokenUsage: ()=> void
+}
+
+export default function TokenUsage({TokenUsage}:Props) {
   const [tokenUsage, setTokenUsage] = useState({
     used: 0,
     total: 0,
     conversations: 0,
   });
   const [isLoadingTokens, setIsLoadingTokens] = useState(false);
-  const [isTokenUsageSection, setIsTokenUsageSection] = useState(false);
 
-  const fetchTokenUsage = async () => {
-    setIsLoadingTokens(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setTokenUsage({
-      used: 1500,
-      total: 10000,
-      conversations: 25,
-    });
-    setIsLoadingTokens(false);
-    setIsTokenUsageSection(true);
-  };
 
   return (
     <Dialog>
@@ -38,7 +29,11 @@ export default function TokenUsage() {
           variant="outline"
           size="sm"
           className="flex items-center rounded-[4px] bg-gradient-to-r from-blue-500 to-blue-700 border-0 text-white"
-        >
+          onClick={()=>{
+            console.log("hello")
+            TokenUsage()
+          }}
+       >
           <BarChart2 className="w-4 h-4 mr-2" />
           Fetch Token Usage
         </Button>
@@ -47,7 +42,6 @@ export default function TokenUsage() {
         <DialogHeader>
           <DialogTitle>Token Usage Statistics</DialogTitle>
         </DialogHeader>
-        {isTokenUsageSection ? (
           <div className="space-y-4">
             <div>
               <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -71,27 +65,13 @@ export default function TokenUsage() {
               </p>
             </div>
             <Button
-              onClick={fetchTokenUsage}
+              onClick={TokenUsage}
               disabled={isLoadingTokens}
-              className="bg-primary-700"
+              className="bg-primary-700 h-[36px] rounded-[4px] "
             >
               {isLoadingTokens ? "Refreshing..." : "Refresh Stats"}
             </Button>
           </div>
-        ) : (
-          <div className="text-center">
-            <p className="text-gray-500 dark:text-gray-400 mb-4">
-              Click the button below to load your token usage statistics.
-            </p>
-            <Button
-              variant={"outline"}
-              onClick={fetchTokenUsage}
-              disabled={isLoadingTokens}
-            >
-              {isLoadingTokens ? "Loading..." : "Load Stats"}
-            </Button>
-          </div>
-        )}
       </DialogContent>
     </Dialog>
   );

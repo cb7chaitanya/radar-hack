@@ -10,6 +10,7 @@ import PromptBox from "./PromtBox";
 import MessageBox from "./MessageBox";
 import { promptMessages, promptType } from "./prompt";
 import { tokenToBodhiCost } from "@/utils/calculateCost";
+import ChatHeader from "../Header/ChatHeader";
 
 export default function Chat({ userId }: { userId: string }) {
   const [input, setInput] = useState("");
@@ -85,6 +86,9 @@ export default function Chat({ userId }: { userId: string }) {
   };
 
   return (
+    <div>
+        <ChatHeader handleTokenUsage={handleTokenCount}/>
+        <main className="flex-1">
     <div className="w-full min-h-screen flex flex-col text-white overflow-hidden">
       <div className="mt-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center h-full py-10">
         {messages?.length === 0 && (
@@ -181,6 +185,8 @@ export default function Chat({ userId }: { userId: string }) {
           )}
         </div>
       </div>
+    </div>
+    </main>
     </div>
   );
 }
