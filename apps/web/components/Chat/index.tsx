@@ -9,10 +9,6 @@ import { useRef, useState } from "react";
 import PromptBox from "./PromtBox";
 import MessageBox from "./MessageBox";
 import { promptMessages, promptType } from "./prompt";
-import { remark } from "remark";
-import html from "remark-html";
-import { htmlToText } from "html-to-text";
-import { Button } from "@repo/ui/components/ui/button";
 
 export default function Chat({ userId }: { userId: string }) {
   const [input, setInput] = useState("");
@@ -20,8 +16,6 @@ export default function Chat({ userId }: { userId: string }) {
     { type: "prompt" | "response"; content: string }[]
   >([]);
   const [tokenCount, setTokenCount] = useState(0);
-  const [maxTokens, setMaxTokens] = useState(1000);
-  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const submitButtonRef: any = useRef();
 
@@ -45,19 +39,11 @@ export default function Chat({ userId }: { userId: string }) {
       },
     });
 
-    // Converts markdown into HTML string via remark
-    const processedContent = await remark()
-      .use(html)
-      .process(res.data.response.promptResult);
-
-    const contentHtml = processedContent.toString();
-
-    // Converts html to text
-    const finalResponse = htmlToText(contentHtml);
     setMessages((prevMessages) => [
       ...prevMessages,
-      { type: "response", content: finalResponse },
+      { type: "response", content: res.data.response.promptResult },
     ]);
+
     await geminiStore(
       input,
       res.data.response.promptResult,
@@ -93,7 +79,6 @@ export default function Chat({ userId }: { userId: string }) {
     }
   };
 
-  // className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600 animate-gradient-x"
   return (
     <div className="w-full min-h-screen flex flex-col text-white overflow-hidden">
       <div className="mt-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center h-full py-10">
@@ -132,7 +117,7 @@ export default function Chat({ userId }: { userId: string }) {
 
         {/* Display Prompts */}
         {messages?.length > 0 && (
-          <div className="flex-grow overflow-auto w-full mb-16 pb-20 px-6">
+          <div className="flex-grow overflow-auto w-full mb-20 pb-20 px-6">
             {messages?.map((message, index) =>
               message?.type === "prompt" ? (
                 <PromptBox key={index} prompt={message?.content} />
@@ -140,9 +125,9 @@ export default function Chat({ userId }: { userId: string }) {
                 <MessageBox key={index} message={message.content} />
               ),
             )}
-            <div ref={scrollToBottomRef} />
           </div>
         )}
+        <div ref={scrollToBottomRef} className="h-[100px]"></div>
 
         {/* Input box section */}
         <div className="w-full">
