@@ -1,7 +1,10 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useState, Suspense } from "react";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { TextGenerateEffect } from "@repo/ui/components/ui/text-generate-effect";
 import { Bot, Check, CheckCircle, Copy } from "lucide-react";
+import { Button } from "@repo/ui/components/ui/button";
+import Markdown from "./Markdown";
 
 interface Props {
   message: string;
@@ -30,14 +33,15 @@ const MessageBox: FC<Props> = ({ message }) => {
       }, 5000);
     }
   };
+
   return (
     <div className="">
       <div className="">
         <Bot className="w-5 h-5 text-white" />
       </div>
       <div className=" flex flex-col w-full">
-        <div className="max-w-[80%] bg-gradient-to-br from-purple-600 to-pink-600 px-4 w-fit pb-3 rounded-[4px]">
-          <TextGenerateEffect words={message} duration={0.5} className="" />
+        <div className="max-w-[80%] bg-gradient-to-br from-purple-600 to-pink-600 p-4 w-fit rounded-[4px]">
+          <Markdown message={message} />
         </div>
         <div className="flex">
           {!isCopy ? (
