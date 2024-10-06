@@ -3,7 +3,6 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { Button } from "@repo/ui/components/ui/button";
 import { Check, Copy } from "lucide-react";
 import { TextGenerateEffect } from "@repo/ui/components/ui/text-generate-effect";
-import Typewriter from "./Typewriter";
 
 export default React.memo(function Markdown({ message }: { message: string }) {
   const CopyButton = ({ code }: { code: string }) => {
