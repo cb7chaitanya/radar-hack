@@ -18,10 +18,16 @@ import { useRouter } from "next/navigation";
 import TokenUsage from "../TokenUsage";
 
 interface Props {
-  handleTokenUsage: ()=> void;
+  handleTokenUsage: () => void;
+  isDisabled: boolean;
+  token: number;
 }
 
-export default function ChatHeader({handleTokenUsage}:Props) {
+export default function ChatHeader({
+  handleTokenUsage,
+  isDisabled,
+  token,
+}: Props) {
   const { theme, setTheme } = useTheme();
   const { connected } = useWallet();
   const router = useRouter();
@@ -68,7 +74,11 @@ export default function ChatHeader({handleTokenUsage}:Props) {
                 <SelectItem value="llama">LLaMA</SelectItem>
               </SelectContent>
             </Select>
-            <TokenUsage TokenUsage={handleTokenUsage}/>
+            <TokenUsage
+              TokenUsage={handleTokenUsage}
+              isDisabled={isDisabled}
+              tokenCount={token}
+            />
             {connected && <TopupDialog />}
           </nav>
           {connected && (
@@ -139,7 +149,11 @@ export default function ChatHeader({handleTokenUsage}:Props) {
               <SelectItem value="llama">LLaMA</SelectItem>
             </SelectContent>
           </Select>
-          <TokenUsage TokenUsage={handleTokenUsage}/>
+          <TokenUsage
+            TokenUsage={handleTokenUsage}
+            isDisabled={isDisabled}
+            tokenCount={token}
+          />
           {connected && <TopupDialog />}
           <Button variant="ghost" size="sm" onClick={() => handleSignOut()}>
             <LogOut className="w-4 h-4 mr-2" />
