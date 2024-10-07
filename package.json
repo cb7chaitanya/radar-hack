@@ -27,6 +27,7 @@
         "next-auth": "^4.24.8",
         "next-mdx-remote": "^5.0.0",
         "npm": "^10.8.3",
+        "recharts": "^2.12.7",
         "simplex-noise": "^4.0.3",
         "ui": "^0.2.4"
     }
