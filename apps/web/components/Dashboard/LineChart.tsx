@@ -93,7 +93,7 @@ export function LineChartWithLabel() {
     <Card>
       <CardHeader>
         <CardTitle>Line Chart - Label</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardDescription>Token Count Chart</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
