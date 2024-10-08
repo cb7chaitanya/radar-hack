@@ -63,7 +63,6 @@ export default function LandingHeader() {
               <div>No items</div>
             )}
 
-            {!connected && (
               <WalletMultiButton
                 style={{
                   backgroundColor: "#9333ea",
@@ -72,8 +71,7 @@ export default function LandingHeader() {
                 }}
                 endIcon={<Wallet />}
               />
-            )}
-
+        
             {connected && <TopupDialog />}
           </nav>
           {connected && (
