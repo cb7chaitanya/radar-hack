@@ -1,6 +1,7 @@
 import { checkAuth } from "@/actions/checkAuth";
 import Chat from "@/components/Chat";
-import ChatHeader from "@/components/Header/ChatHeader";
+
+export const dynamic = "force-dynamic";
 
 export default async function Page() {
   const session: any = await checkAuth();
