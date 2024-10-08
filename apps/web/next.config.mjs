@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  swcMinify: false,
   transpilePackages: ["@repo/ui", "next-mdx-remote"],
   env: {
     GEMINI_API_KEY: process.env.GEMINI_API_KEY,

@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 export async function checkAuth() {
   try {
 
-    const session = await getServerSession(authOptions);console.log(authOptions)
+    const session = await getServerSession(authOptions);
     
     if (!session?.user) {
       redirect("/api/auth/signin");
