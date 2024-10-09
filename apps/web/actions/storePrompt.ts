@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/app/db";
+import prisma from "@repo/db/client";
 
 export async function geminiStore(
   prompt: string,
