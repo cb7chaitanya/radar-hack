@@ -64,6 +64,12 @@ export default function ChatHeader({
         </Link>
         <div className="ml-auto flex items-center">
           <nav className="hidden lg:flex items-center space-x-4">
+            <div className="cursor-pointer hover:text-purple-600" 
+            onClick={()=> {
+              router.push("/dashboard")
+            }}>
+              Dashboard
+            </div>
             <Select value={model} onValueChange={setModel}>
               <SelectTrigger className="w-[180px] h-[36px] rounded-[4px]">
                 <SelectValue placeholder="Select AI Model" />

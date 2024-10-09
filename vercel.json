@@ -1,0 +1,17 @@
+{
+    "builds": [
+      {
+        "src": "apps/web/package.json",
+        "use": "@vercel/next"
+      }
+    ],
+    "buildCommand": "npm install && npm run build",
+    "outputDirectory": "apps/web/.next",
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "/api/$1"
+      }
+    ]
+  }
+  
