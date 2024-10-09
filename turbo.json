@@ -15,7 +15,6 @@
       "persistent": true
     },
     "web#build": {
-      "dependsOn": ["^web#build"],
       "env": ["NEXT_PUBLIC_WEBHOOK_URL", "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "NEXTAUTH_SECRET", "NEXTAUTH_URL"]
     }
   }
