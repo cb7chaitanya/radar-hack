@@ -75,9 +75,9 @@ export default function ChatHeader({
                 <SelectValue placeholder="Select AI Model" />
               </SelectTrigger>
               <SelectContent className="bg-white dark:bg-gray-800 rounded-[4px]">
-                <SelectItem value="gpt-4">GPT-4</SelectItem>
-                <SelectItem value="gemini">Gemini</SelectItem>
-                <SelectItem value="llama">LLaMA</SelectItem>
+                <SelectItem className="cursor-pointer" value="gpt-4">GPT-4</SelectItem>
+                <SelectItem className="cursor-pointer" value="gemini">Gemini</SelectItem>
+                <SelectItem className="cursor-pointer" value="llama">LLaMA</SelectItem>
               </SelectContent>
             </Select>
             <TokenUsage
@@ -104,9 +104,9 @@ export default function ChatHeader({
           >
             {mounted &&
               (isDarkMode ? (
-                <Sun className="h-5 w-5" />
+                <Sun className="h-5 w-5 hover:text-purple-600" />
               ) : (
-                <Moon className="h-5 w-5" />
+                <Moon className="h-5 w-5 hover:text-purple-600" />
               ))}
           </Button>
           {
@@ -116,7 +116,7 @@ export default function ChatHeader({
               onClick={() => handleSignOut()}
               className="hidden lg:flex"
             >
-              <LogOut className="w-4 h-4 mr-2" />
+              <LogOut className="w-4 h-4 mr-2 cursor-pointer" />
               Log Out
             </Button>
           }
@@ -150,9 +150,9 @@ export default function ChatHeader({
               <SelectValue placeholder="Select AI Model" />
             </SelectTrigger>
             <SelectContent className="bg-white dark:bg-gray-800 rounded-[4px]">
-              <SelectItem value="gpt-4">GPT-4</SelectItem>
-              <SelectItem value="gemini">Gemini</SelectItem>
-              <SelectItem value="llama">LLaMA</SelectItem>
+              <SelectItem className="cursor-pointer hover:text-purple-600" value="gpt-4">GPT-4</SelectItem>
+              <SelectItem className="cursor-pointer hover:text-purple-600" value="gemini">Gemini</SelectItem>
+              <SelectItem className="cursor-pointer hover:text-purple-600" value="llama">LLaMA</SelectItem>
             </SelectContent>
           </Select>
           <TokenUsage
@@ -160,9 +160,15 @@ export default function ChatHeader({
             isDisabled={isDisabled}
             tokenCount={token}
           />
+             <div className="text-center cursor-pointer hover:text-purple-600" 
+            onClick={()=> {
+              router.push("/dashboard")
+            }}>
+              Dashboard
+            </div>
           {connected && <TopupDialog />}
-          <Button variant="ghost" size="sm" onClick={() => handleSignOut()}>
-            <LogOut className="w-4 h-4 mr-2" />
+          <Button variant="ghost" className="hover:text-purple-600" size="sm" onClick={() => handleSignOut()}>
+            <LogOut className="w-4 h-4 mr-2 cursor-pointer" />
             Log Out
           </Button>
         </nav>
