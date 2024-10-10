@@ -1,6 +1,6 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
+import { useTheme } from "next-themes";
 import { CartesianGrid, LabelList, Line, LineChart, XAxis } from "recharts";
 import {
   Card,
@@ -17,6 +17,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { tokenCountData } from "./tokenCountData";
 
 export const description = "A line chart with a label";
 
@@ -33,50 +34,8 @@ const chartConfig = {
 
 export function LineChartWithLabel() {
   const { publicKey } = useWallet();
-  const tokenCountData = [
-    {
-      id: 1,
-      userId: "user1",
-      inputToken: 10,
-      outputToken: 5,
-      timestamp: "2023-02-20T14:30:00.000Z",
-    },
-    {
-      id: 2,
-      userId: "user1",
-      inputToken: 15,
-      outputToken: 10,
-      timestamp: "2023-02-20T15:00:00.000Z",
-    },
-    {
-      id: 3,
-      userId: "user1",
-      inputToken: 20,
-      outputToken: 15,
-      timestamp: "2023-02-20T15:30:00.000Z",
-    },
-    {
-      id: 4,
-      userId: "user2",
-      inputToken: 5,
-      outputToken: 0,
-      timestamp: "2023-02-20T14:30:00.000Z",
-    },
-    {
-      id: 5,
-      userId: "user2",
-      inputToken: 10,
-      outputToken: 5,
-      timestamp: "2023-02-20T15:00:00.000Z",
-    },
-    {
-      id: 6,
-      userId: "user2",
-      inputToken: 15,
-      outputToken: 10,
-      timestamp: "2023-02-20T15:30:00.000Z",
-    },
-  ];
+  const { theme } = useTheme();
+
   const transformedData = tokenCountData.map((data) => {
     const date = new Date(data.timestamp);
     const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
@@ -99,6 +58,7 @@ export function LineChartWithLabel() {
             <LineChart
               accessibilityLayer
               data={transformedData}
+              className="fill-black dark:fill-white"
               margin={{
                 top: 20,
                 left: 12,
@@ -107,6 +67,7 @@ export function LineChartWithLabel() {
             >
               <CartesianGrid vertical={false} />
               <XAxis
+                className="fill-green-800 text-bold dark:fill-white"
                 dataKey="timestamp"
                 tickLine={false}
                 axisLine={false}
@@ -119,7 +80,7 @@ export function LineChartWithLabel() {
               <Line
                 dataKey="totalToken"
                 type="natural"
-                stroke="#ffffff"
+                stroke={theme === "dark" ? "#ffffff" : "#000000"} // Change line color based on theme
                 strokeWidth={2}
                 dot={{
                   fill: "var(--color-desktop)",
@@ -131,7 +92,7 @@ export function LineChartWithLabel() {
                 <LabelList
                   position="top"
                   offset={12}
-                  className="fill-white"
+                  className="fill-black dark:fill-white "
                   fontSize={12}
                 />
               </Line>

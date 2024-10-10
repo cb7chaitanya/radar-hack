@@ -76,13 +76,22 @@ export default function ChatHeader({
                 <SelectValue placeholder="Select AI Model" />
               </SelectTrigger>
               <SelectContent className="bg-white dark:bg-gray-800 rounded-[4px]">
-                <SelectItem className="cursor-pointer" value="gpt-4">
+                <SelectItem
+                  className="cursor-pointer hover:text-purple-600"
+                  value="gpt-4"
+                >
                   GPT-4
                 </SelectItem>
-                <SelectItem className="cursor-pointer" value="gemini">
+                <SelectItem
+                  className="cursor-pointer hover:text-purple-600"
+                  value="gemini"
+                >
                   Gemini
                 </SelectItem>
-                <SelectItem className="cursor-pointer" value="llama">
+                <SelectItem
+                  className="cursor-pointer hover:text-purple-600"
+                  value="llama"
+                >
                   LLaMA
                 </SelectItem>
               </SelectContent>
@@ -121,7 +130,7 @@ export default function ChatHeader({
               variant="ghost"
               size="sm"
               onClick={() => handleSignOut()}
-              className="hidden lg:flex"
+              className="hidden lg:flex hover:text-purple-600 cursor-pointer"
             >
               <LogOut className="w-4 h-4 mr-2 cursor-pointer" />
               Log Out

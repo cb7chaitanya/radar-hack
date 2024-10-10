@@ -91,14 +91,14 @@ export default function LandingHeader() {
           >
             {mounted &&
               (isDarkMode ? (
-                <Sun className="h-5 w-5" />
+                <Sun className="h-5 w-5 hover:text-purple-600" />
               ) : (
-                <Moon className="h-5 w-5" />
+                <Moon className="h-5 w-5 hover:text-purple-600" />
               ))}
           </Button>
           {session.status !== "loading" && (
             <Button
-              className="hidden lg:flex"
+              className="hidden lg:flex hover:text-purple-600"
               variant="ghost"
               size="sm"
               onClick={() =>
@@ -170,6 +170,7 @@ export default function LandingHeader() {
           {session.status !== "loading" && (
             <Button
               variant="ghost"
+              className="hover:text-purple-600"
               size="sm"
               onClick={() =>
                 session.status === "authenticated"
