@@ -1,3 +1,4 @@
+/* eslint-disable turbo/no-undeclared-env-vars */
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@repo/db/client";
@@ -28,8 +29,10 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    async redirect({ url, baseUrl }: { url: any; baseUrl: any }) {
-      return "http://localhost:3000/chat";
+    async redirect() {
+      return process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/chat"
+        : "http://bodhi.crabdance.com/chat";
     },
   },
 };

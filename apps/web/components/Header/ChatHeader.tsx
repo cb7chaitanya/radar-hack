@@ -48,7 +48,6 @@ export default function ChatHeader({
 
   const handleSignOut = async () => {
     await signOut();
-    router.push("/");
   };
 
   if (!mounted) return null;
