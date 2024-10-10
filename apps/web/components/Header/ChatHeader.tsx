@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/components/ui/select";
-import { Brain, Moon, Sun, Wallet, LogOut, X, Menu } from "lucide-react";
+import { Brain, Moon, Sun, LogOut, X, Menu } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import TopupDialog from "../Topup";
@@ -64,10 +64,12 @@ export default function ChatHeader({
         </Link>
         <div className="ml-auto flex items-center">
           <nav className="hidden lg:flex items-center space-x-4">
-            <div className="cursor-pointer hover:text-purple-600" 
-            onClick={()=> {
-              router.push("/dashboard")
-            }}>
+            <div
+              className="cursor-pointer hover:text-purple-600"
+              onClick={() => {
+                router.push("/dashboard");
+              }}
+            >
               Dashboard
             </div>
             <Select value={model} onValueChange={setModel}>
@@ -75,9 +77,15 @@ export default function ChatHeader({
                 <SelectValue placeholder="Select AI Model" />
               </SelectTrigger>
               <SelectContent className="bg-white dark:bg-gray-800 rounded-[4px]">
-                <SelectItem className="cursor-pointer" value="gpt-4">GPT-4</SelectItem>
-                <SelectItem className="cursor-pointer" value="gemini">Gemini</SelectItem>
-                <SelectItem className="cursor-pointer" value="llama">LLaMA</SelectItem>
+                <SelectItem className="cursor-pointer" value="gpt-4">
+                  GPT-4
+                </SelectItem>
+                <SelectItem className="cursor-pointer" value="gemini">
+                  Gemini
+                </SelectItem>
+                <SelectItem className="cursor-pointer" value="llama">
+                  LLaMA
+                </SelectItem>
               </SelectContent>
             </Select>
             <TokenUsage
@@ -150,9 +158,24 @@ export default function ChatHeader({
               <SelectValue placeholder="Select AI Model" />
             </SelectTrigger>
             <SelectContent className="bg-white dark:bg-gray-800 rounded-[4px]">
-              <SelectItem className="cursor-pointer hover:text-purple-600" value="gpt-4">GPT-4</SelectItem>
-              <SelectItem className="cursor-pointer hover:text-purple-600" value="gemini">Gemini</SelectItem>
-              <SelectItem className="cursor-pointer hover:text-purple-600" value="llama">LLaMA</SelectItem>
+              <SelectItem
+                className="cursor-pointer hover:text-purple-600"
+                value="gpt-4"
+              >
+                GPT-4
+              </SelectItem>
+              <SelectItem
+                className="cursor-pointer hover:text-purple-600"
+                value="gemini"
+              >
+                Gemini
+              </SelectItem>
+              <SelectItem
+                className="cursor-pointer hover:text-purple-600"
+                value="llama"
+              >
+                LLaMA
+              </SelectItem>
             </SelectContent>
           </Select>
           <TokenUsage
@@ -160,14 +183,21 @@ export default function ChatHeader({
             isDisabled={isDisabled}
             tokenCount={token}
           />
-             <div className="text-center cursor-pointer hover:text-purple-600" 
-            onClick={()=> {
-              router.push("/dashboard")
-            }}>
-              Dashboard
-            </div>
+          <div
+            className="text-center cursor-pointer hover:text-purple-600"
+            onClick={() => {
+              router.push("/dashboard");
+            }}
+          >
+            Dashboard
+          </div>
           {connected && <TopupDialog />}
-          <Button variant="ghost" className="hover:text-purple-600" size="sm" onClick={() => handleSignOut()}>
+          <Button
+            variant="ghost"
+            className="hover:text-purple-600"
+            size="sm"
+            onClick={() => handleSignOut()}
+          >
             <LogOut className="w-4 h-4 mr-2 cursor-pointer" />
             Log Out
           </Button>

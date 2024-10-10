@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { navitems } from "./navitems";
 
 export default function LandingHeader() {
-  const { theme, resolvedTheme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const { connected } = useWallet();
   const router = useRouter();
   const session = useSession();
@@ -41,7 +41,7 @@ export default function LandingHeader() {
   return (
     <>
       <header className="px-4 lg:px-6 h-16 flex items-center backdrop-blur-md bg-white/30 dark:bg-gray-900/30 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 transition-all duration-300">
-        <Link className="flex items-center justify-center" href="#">
+        <Link className="flex items-center justify-center" href="/">
           <Brain className="h-8 w-8 text-purple-600 dark:text-purple-400" />
           <span className="ml-2 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400">
             Bodhi
@@ -63,15 +63,15 @@ export default function LandingHeader() {
               <div>No items</div>
             )}
 
-              <WalletMultiButton
-                style={{
-                  backgroundColor: "#9333ea",
-                  height: "36px",
-                  borderRadius: "4px",
-                }}
-                endIcon={<Wallet />}
-              />
-        
+            <WalletMultiButton
+              style={{
+                backgroundColor: "#9333ea",
+                height: "36px",
+                borderRadius: "4px",
+              }}
+              endIcon={<Wallet />}
+            />
+
             {connected && <TopupDialog />}
           </nav>
           {connected && (
