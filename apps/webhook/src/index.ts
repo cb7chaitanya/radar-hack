@@ -15,13 +15,13 @@ app.use(express.json());
 app.use(`${apiRoute}/gemini`, geminiRouter);
 
 app.get("/", (req, res) => {
-    res.json({
-        msg: "Healthy server!",
-    });
+  res.json({
+    msg: "Healthy server!",
+  });
 });
 
 app.listen(PORT, () => {
-    console.log(`Listening on PORT ${PORT}`);
+  console.log(`Listening on PORT ${PORT}`);
 });
 
 // export const handler = serverlessExpress({ app });

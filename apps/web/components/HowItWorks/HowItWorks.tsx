@@ -1,8 +1,6 @@
 import { steps } from "./steps";
 
-
 export const HowItWorks = () => {
- 
   return (
     <section
       id="how-it-works"

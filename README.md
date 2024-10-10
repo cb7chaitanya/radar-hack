@@ -12,7 +12,6 @@ Bodhi stands out as a transformative platform that merges blockchain and AI capa
 - **Decentralization and Security**: Blockchain ensures secure transactions and data integrity.
 - **Innovative Ecosystem**: Paves the way for future developments in AI and digital identity.
 
-
 ## Tech Stack
 
 Bodhi leverages a range of modern technologies to deliver a fast, scalable, and secure platform:
@@ -62,12 +61,14 @@ Bodhi leverages a range of modern technologies to deliver a fast, scalable, and 
 ### Installation
 
 1. **Clone the Repository**:
+
    ```bash
    git clone https://github.com/cb7chaitanya/radar-hack
    cd bodhi
    ```
 
 2. **Install Dependencies**:
+
    ```bash
    npm install
    ```
@@ -75,6 +76,7 @@ Bodhi leverages a range of modern technologies to deliver a fast, scalable, and 
 3. **Set Up Environment Variables**:
 
    - **Web**: Create a `.env` file in the `web` directory and add the following:
+
      ```bash
      NEXT_PUBLIC_WEBHOOK_URL=""
      GOOGLE_CLIENT_ID=""
@@ -84,6 +86,7 @@ Bodhi leverages a range of modern technologies to deliver a fast, scalable, and 
      ```
 
    - **Webhook**: Create a `.env` file in the `webhook` directory and add:
+
      ```bash
      PORT=3301
      GEMINI_API_KEY=
@@ -93,6 +96,7 @@ Bodhi leverages a range of modern technologies to deliver a fast, scalable, and 
    - **DB**: Set up the necessary environment variables in the `db` directory.
 
 4. **Run the Development Server**:
+
    ```bash
    npm run dev
    ```
@@ -102,4 +106,3 @@ Bodhi leverages a range of modern technologies to deliver a fast, scalable, and 
 ## Reference
 
 For more details, visit the [Bodhi Documentation](https://marred-forger-0bc.notion.site/Bodhi-Documentation-1198f73b891b8041bba4fd9e8cac28f3).
-

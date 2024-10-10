@@ -34,25 +34,25 @@ export default function LoginPage() {
     >
       <div className="flex-grow flex flex-col md:flex-row">
         {/* Left side - Login content */}
-          <LeftSide/>
+        <LeftSide />
         {/* Right side - Graphics */}
-        <RightSide/>
+        <RightSide />
       </div>
       <LoginFooter>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="rounded-full"
-            aria-label="Toggle dark mode"
-          >
-            {isDarkMode ? (
-              <Sun className="h-5 w-5" />
-            ) : (
-              <Moon className="h-5 w-5" />
-            )}
-          </Button>
-          </LoginFooter>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          className="rounded-full"
+          aria-label="Toggle dark mode"
+        >
+          {isDarkMode ? (
+            <Sun className="h-5 w-5" />
+          ) : (
+            <Moon className="h-5 w-5" />
+          )}
+        </Button>
+      </LoginFooter>
     </div>
   );
 }
